@@ -7,16 +7,47 @@ import Steps from "./components/Steps.tsx";
 // Hooks
 import { useForm } from "./hooks/useForm.tsx";
 
+// React
+import { useState } from "react";
+
 // Icons
 import { GrFormNext, GrFormPrevious } from "react-icons/gr";
 
 // CSS
 import "./App.css";
+import { FiSend } from "react-icons/fi";
+
+type FormFields = {
+  name: string;
+  email: string;
+  review: string;
+  comment: string;
+};
+
+const formTemplate: FormFields = {
+  name: "",
+  email: "",
+  review: "",
+  comment: "",
+};
 
 function App() {
-  const formComponents = [<UserForm />, <ReviewForm />, <Thanks />];
+  const [data, setData] = useState(formTemplate);
 
-  const { currentStep, currentComponent, changeStep } = useForm(formComponents);
+  const updateFieldHandler = (key: string, value: string) => {
+    setData((prev) => {
+      return { ...prev, [key]: value };
+    });
+  };
+
+  const formComponents = [
+    <UserForm data={data} updateFieldHandler={updateFieldHandler} />,
+    <ReviewForm data={data} updateFieldHandler={updateFieldHandler} />,
+    <Thanks data={data} />,
+  ];
+
+  const { currentStep, currentComponent, changeStep, isLastStep } =
+    useForm(formComponents);
 
   return (
     <div className="App">
@@ -36,10 +67,17 @@ function App() {
               <GrFormPrevious />
               <span>Voltar</span>
             </button>
-            <button type="submit">
-              <span>Avançar</span>
-              <GrFormNext />
-            </button>
+            {!isLastStep ? (
+              <button type="submit">
+                <span>Avançar</span>
+                <GrFormNext />
+              </button>
+            ) : (
+              <button type="button">
+                <span>Enviar</span>
+                <FiSend />
+              </button>
+            )}
           </div>
         </form>
       </div>
