@@ -32,12 +32,10 @@ const formTemplate: FormFields = {
 };
 
 function App() {
-  const [data, setData] = useState(formTemplate);
+  const [data, setData] = useState<FormFields>(formTemplate);
 
   const updateFieldHandler = (key: string, value: string) => {
-    setData((prev) => {
-      return { ...prev, [key]: value };
-    });
+    setData((prev) => ({ ...prev, [key]: value }));
   };
 
   const formComponents = [
@@ -63,16 +61,22 @@ function App() {
         <form onSubmit={(e) => changeStep(currentStep + 1, e)}>
           <div className="inputs-container">{currentComponent}</div>
           <div className="actions">
-            <button type="button" onClick={() => changeStep(currentStep - 1)}>
+            <button
+              type="button"
+              onClick={() => changeStep(Math.max(currentStep - 1, 0))}
+              disabled={currentStep === 0}
+            >
               <GrFormPrevious />
               <span>Voltar</span>
             </button>
             {!isLastStep ? (
+              // Se não for a última etapa do formulário, exibe o botão "Avançar"
               <button type="submit">
                 <span>Avançar</span>
                 <GrFormNext />
               </button>
             ) : (
+              // Se for a última etapa do formulário, exibe o botão "Enviar"
               <button type="button">
                 <span>Enviar</span>
                 <FiSend />
