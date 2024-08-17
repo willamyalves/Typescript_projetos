@@ -90,3 +90,5 @@ function App() {
 }
 
 export default App;
+
+export const apiURL = "https://api.openai.com/v1/chat/completions";
