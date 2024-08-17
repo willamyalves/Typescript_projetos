@@ -1,0 +1,35 @@
+.home h1 {
+  margin: 20px 0;
+}
+.app-container {
+  background-color: #2b3566;
+  width: 450px;
+  margin: 0 auto;
+  border-radius: 10px;
+  padding: 30px;
+  margin-bottom: 30px;
+}
+.app-container p {
+  margin: 20px 0;
+  color: #8e95b9;
+}
+.search {
+  display: flex;
+  justify-content: center;
+  gap: 5px;
+}
+.search input {
+  padding: 8px 5px;
+  border-radius: 5px;
+  border: none;
+}
+.search button span {
+  padding: 8px;
+  color: #fff;
+}
+.search button {
+  cursor: pointer;
+  border-radius: 5px;
+  border: none;
+  background-color: #0e1129;
+}

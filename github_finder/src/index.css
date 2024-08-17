@@ -3,6 +3,8 @@
   margin: 0;
   box-sizing: border-box;
   font-family: Inter, Arial, Helvetica, sans-serif;
+}
+body {
   background-color: #0e1129;
   color: aliceblue;
 }
